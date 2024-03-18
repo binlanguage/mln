@@ -1,0 +1,12 @@
+mport tensorflow_datasets as tfds
+
+dataset, info = tfds.load("tf_flowers", as_supervised=True, with_info=True)
+info.splits
+#只有"train"训练集，没有测试集和验证集，所以需要分割训练集。
+
+train_set,valid_set,test_set = tfds.load("tf_flowers", 
+                                         split=["train[:75%]", "train[75%:90%]", "train[:10%]"],
+                                         as_supervised=True)
+print("train_set:",len(list(train_set)))
+print("valid_set:",len(list(valid_set)))
+print("test_set:",len(list(test_set)))
